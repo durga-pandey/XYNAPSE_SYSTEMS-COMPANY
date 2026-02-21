@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(
+    to right,
+    #2a063d 0%,
+    #4b0f63 0%,
+    #0b1d3a 100%
+  );
+}
+
+.perspective:hover .card { transform: rotateY(360deg); }
+
+
+
+
