@@ -1,12 +1,14 @@
 import { useEffect, useRef } from "react";
-import { FaArrowRight } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
+import { motion } from "framer-motion";
 
 import "swiper/css";
 import "swiper/css/autoplay";
 
-import { FaStar } from "react-icons/fa";
+import AboutHero from "../components/AboutHero";
+import TeamSpeciality from "../components/TeamSpeciality";
+import FunFactsSection from "../components/FunFactSection";
 
 const teamMembers = [
   {
@@ -93,8 +95,8 @@ const funFacts = [
   "Team has members from 5 different countries.",
   "We code, laugh, and innovate together daily.",
   "Late-night coding sessions often turn into idea marathons.",
-  "Music plays softly in the background during deep work.",
-  "Team brainstorming sessions spark our most creative solutions.",
+  // "Music plays softly in the background during deep work.",
+  // "Team brainstorming sessions spark our most creative solutions.",
 ];
 
 const clientCircles = [
@@ -121,6 +123,7 @@ const AboutPage = () => {
 
   useEffect(() => {
     const canvas = bubbleCanvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
 
     const SAFE_PADDING = 40;
@@ -201,401 +204,121 @@ const AboutPage = () => {
 
   return (
     <>
-      <div className="w-full min-h-screen flex items-center justify-center px-4 sm:px-6">
-        <div className="max-w-8xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-[100px] items-center">
-          {/* LEFT IMAGE SECTION */}
-          <div className="relative flex items-center justify-center mt-10 md:mt-0">
-            <img
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
-              alt="Hand"
-              className="
-          object-cover rounded-xl relative z-10
-          w-[90%] h-[320px]
-          sm:w-[400px] sm:h-[400px]
-          lg:w-96 lg:h-[480px]
-        "
-            />
+      <AboutHero/>
 
-            {/* Animated Circle */}
-            <div
-              className="
-          absolute z-20
-          left-1/2 -translate-x-1/2
-          -bottom-24 sm:-bottom-28
-          lg:left-auto lg:bottom-auto
-          lg:top-1/2 lg:-translate-y-1/2
-          lg:right-[-90px]
-        "
-            >
-              <div className="circle-wrap">
-                <div className="ring">
-                  <div className="arm arm-blue">
-                    <span className="dot blue"></span>
-                  </div>
-                  <div className="arm arm-pink">
-                    <span className="dot pink"></span>
-                  </div>
+     <section className="relative w-full py-24 bg-[#030712] overflow-hidden">
+      {/* Background Tech Orbs */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
 
-                  <div className="inner-circle">
-                    <img
-                      src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9"
-                      alt="Team"
-                      className="w-full h-full object-cover rounded-full"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        
+        {/* LEFT: CONTENT AREA */}
+        <div className="space-y-8">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="text-cyan-400 font-black uppercase tracking-[0.4em] text-xs">Our Backbone</span>
+            <h2 className="text-5xl md:text-6xl font-black text-white tracking-tighter mt-4 leading-none">
+              The Minds Behind <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+                The Machine.
+              </span>
+            </h2>
+          </motion.div>
 
-            <style jsx>{`
-              .circle-wrap {
-                width: 200px;
-                height: 200px;
-              }
-
-              @media (min-width: 640px) {
-                .circle-wrap {
-                  width: 230px;
-                  height: 230px;
-                }
-              }
-
-              .ring {
-                position: relative;
-                width: 100%;
-                height: 100%;
-                border-radius: 50%;
-              }
-
-              .arm {
-                position: absolute;
-                inset: 0;
-                border-radius: 50%;
-                mask: radial-gradient(transparent 63%, black 65%);
-              }
-
-              .arm-blue {
-                background: conic-gradient(
-                  #6366f1 0deg 108deg,
-                  transparent 108deg 360deg
-                );
-                animation: spinBlue 4s linear infinite;
-              }
-
-              .arm-pink {
-                background: conic-gradient(
-                  #ec4899 0deg 108deg,
-                  transparent 108deg 360deg
-                );
-                animation: spinPink 4s linear infinite;
-              }
-
-              .dot {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 14px;
-                height: 14px;
-                border-radius: 50%;
-                transform: translateX(calc(50% - 2px));
-              }
-
-              .blue {
-                background: #6366f1;
-                box-shadow: 0 0 16px #6366f1;
-              }
-
-              .pink {
-                background: #ec4899;
-                box-shadow: 0 0 16px #ec4899;
-              }
-
-              @keyframes spinBlue {
-                from {
-                  transform: rotate(0deg);
-                }
-                to {
-                  transform: rotate(360deg);
-                }
-              }
-
-              @keyframes spinPink {
-                from {
-                  transform: rotate(360deg);
-                }
-                to {
-                  transform: rotate(0deg);
-                }
-              }
-
-              .inner-circle {
-                position: absolute;
-                inset: 12px;
-                border-radius: 50%;
-                background: #fff;
-                overflow: hidden;
-                z-index: 5;
-              }
-            `}</style>
+          <div className="space-y-6 max-w-xl text-left">
+            <p className="text-slate-400 text-lg leading-relaxed">
+              Our team isn't just a group of employees; it's a high-sync collective of <span className="text-white">problem solvers and digital craftsmen</span>. We blend diverse expertise to architect solutions that don't just work—they lead.
+            </p>
+            <p className="text-slate-500 text-base leading-relaxed">
+              From deep-learning specialists to cloud-native architects, every member is handpicked to maintain technical excellence.
+            </p>
           </div>
 
-          {/* RIGHT TEXT SECTION */}
-          <div className="flex flex-col text-white text-center md:text-left mt-16 md:mt-0">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-8">
-              Introduction to Our Team
-            </h2>
-
-            <button className="mx-auto md:mx-0 flex items-center gap-2 w-fit px-6 py-3 bg-white text-gray-900 rounded-full font-semibold hover:scale-105 transition mb-8">
-              Our Story <FaArrowRight />
-            </button>
-
-            <div className="space-y-4 text-white/90 leading-relaxed max-w-xl mx-auto md:mx-0">
-              <p className="text-base sm:text-lg tracking-wide">
-                We are a software-driven team focused on building scalable,
-                secure, and user-centric digital products that help businesses
-                grow and innovate faster in competitive markets across
-                industries worldwide today.
-              </p>
-
-              <p className="text-base sm:text-lg tracking-wide">
-                By combining modern technologies with strong engineering
-                practices, we deliver reliable digital solutions that improve
-                efficiency and create long-term value for growing enterprises
-                worldwide today.
-              </p>
+          {/* Stats for Trust */}
+          <div className="flex gap-10 pt-4">
+            <div>
+              <p className="text-4xl font-black text-white">40+</p>
+              <p className="text-xs uppercase tracking-widest text-cyan-500 font-bold mt-1">Engineers</p>
+            </div>
+            <div>
+              <p className="text-4xl font-black text-white">12+</p>
+              <p className="text-xs uppercase tracking-widest text-purple-500 font-bold mt-1">Countries</p>
             </div>
           </div>
         </div>
+
+        {/* RIGHT: ANIMATED SWIPER CARD */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          className="relative group"
+        >
+          {/* Decorative Outer Frame */}
+          <div className="absolute -inset-4 bg-gradient-to-tr from-cyan-500/20 via-purple-500/10 to-transparent rounded-[2.5rem] blur-xl group-hover:opacity-100 transition duration-1000 opacity-50" />
+          
+          <div className="relative bg-[#080c17] border border-white/10 rounded-[2.5rem] p-6 md:p-10 shadow-2xl overflow-hidden">
+            
+            <Swiper
+              modules={[Autoplay, Pagination]}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              pagination={{ clickable: true }}
+              loop={true}
+              spaceBetween={30}
+              className="team-swiper pb-12"
+            >
+              {[0, 1].map((slideIdx) => (
+                <SwiperSlide key={slideIdx}>
+                  <div className="grid grid-cols-2 gap-4">
+                    {teamMembers.slice(slideIdx * 4, slideIdx * 4 + 4).map((member, i) => (
+                      <motion.div
+                        key={i}
+                        whileHover={{ y: -5 }}
+                        className="relative p-4 md:p-6 rounded-2xl bg-white/[0.03] border border-white/5 flex flex-col items-center text-center group/card transition-all"
+                      >
+                        {/* Member Image with Glow */}
+                        <div className="relative mb-4">
+                          <div 
+                            className="absolute inset-0 rounded-full blur-md opacity-40 transition-opacity group-hover/card:opacity-100" 
+                            style={{ backgroundColor: member.color }}
+                          />
+                          <img
+                            src={member.img}
+                            alt={member.name}
+                            className="relative w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/10"
+                          />
+                        </div>
+                        
+                        <h3 className="text-white font-bold text-xs md:text-base mb-1 truncate w-full">
+                          {member.name}
+                        </h3>
+                        <p className="text-[10px] md:text-xs uppercase tracking-tighter font-bold" style={{ color: member.color }}>
+                          {member.role}
+                        </p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </motion.div>
+
       </div>
 
-      <section className="w-full py-20 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          {/* LEFT TEXT */}
-          <div className="text-white text-center md:text-left">
-            <h2 className="text-4xl sm:text-5xl font-extrabold mb-12 leading-tight">
-              Our Team Members
-            </h2>
+      {/* Inline Style for Pagination (Safest for all React setups) */}
+      <style>{`
+        .team-swiper .swiper-pagination-bullet { background: #475569 !important; opacity: 1 !important; }
+        .team-swiper .swiper-pagination-bullet-active { background: #22d3ee !important; width: 20px !important; border-radius: 4px !important; }
+        .team-swiper { padding-bottom: 50px !important; }
+      `}</style>
+    </section>
 
-            <p className="text-white/90 text-lg sm:text-xl leading-relaxed mb-10">
-              Our team is a diverse group of passionate professionals working
-              together to design, develop, and deliver high-quality digital
-              solutions that help businesses scale efficiently while maintaining
-              innovation, performance, long-term reliability, and technical
-              excellence across modern platforms.
-            </p>
+     <TeamSpeciality/>
 
-            <p className="text-white/90 text-lg sm:text-xl leading-relaxed">
-              Each team member brings unique expertise, strong problem-solving
-              skills, and a collaborative mindset, allowing us to build reliable
-              software, exceed client expectations, deliver consistent results,
-              and continuously adapt to evolving industry standards and emerging
-              technologies.
-            </p>
-          </div>
-
-          <div className="relative bg-white rounded-2xl p-6 sm:p-8 shadow-xl overflow-hidden min-h-[440px]">
-            <div className="absolute inset-0 z-0 pointer-events-none">
-              <canvas ref={bubbleCanvasRef} className="w-full h-full block" />
-            </div>
-
-            <div className="absolute inset-0 z-[1] bg-gradient-to-br from-white/60 via-white/40 to-white/20 backdrop-blur-sm" />
-
-            <div className="relative z-10">
-              <Swiper
-                modules={[Autoplay, Navigation]}
-                autoplay={{ delay: 3500, disableOnInteraction: false }}
-                navigation
-                loop
-                spaceBetween={20}
-                slidesPerView={1}
-                breakpoints={{
-                  640: { slidesPerView: 1 },
-                  768: { slidesPerView: 2 },
-                  1024: { slidesPerView: 1 },
-                }}
-                className="team-swiper"
-              >
-                {Array.from({ length: 3 }).map((_, slideIndex) => (
-                  <SwiperSlide key={slideIndex}>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      {teamMembers
-                        .slice(slideIndex * 4, slideIndex * 4 + 4)
-                        .map((member, i) => (
-                          <div
-                            key={i}
-                            className="relative rounded-xl p-6 text-white flex flex-col items-center text-center
-                backdrop-blur-xl border border-white/20
-                shadow-[0_8px_30px_rgba(0,0,0,0.25)]
-                transition-all duration-300"
-                            style={{
-                              backgroundColor: `${member.color}88`,
-                            }}
-                          >
-                            <img
-                              src={member.img}
-                              className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-white/80"
-                            />
-                            <h3 className="text-lg font-bold">{member.name}</h3>
-                            <p className="text-white/90 text-sm">
-                              {member.role}
-                            </p>
-                          </div>
-                        ))}
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="w-full py-24 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto text-center">
-          {/* HEADING */}
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6">
-            Our Team Speciality
-          </h2>
-
-          {/* PARAGRAPH (≈30 words) */}
-          <p className="max-w-3xl mx-auto text-white/90 text-lg sm:text-xl leading-relaxed mb-16">
-            Our team combines technical expertise, creative thinking, and
-            strategic execution to deliver scalable, secure, and
-            high-performance digital solutions that consistently exceed client
-            expectations across industries.
-          </p>
-
-          {/* CARDS */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 place-items-center">
-            {/* CARD 1 */}
-            <div
-              className="w-64 h-[340px] bg-white/15 backdrop-blur-xl
-        rounded-t-full rounded-b-none
-        border border-white/20
-        shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-        flex flex-col items-center justify-start pt-10 text-center
-      "
-            >
-              <div className="w-32 h-32 rounded-full border-4 border-white overflow-hidden mb-6">
-                <img
-                  src="https://images.unsplash.com/photo-1527980965255-d3b416303d12"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="text-white text-xl font-bold">Aarav Sharma</h3>
-              <p className="text-white/80 mt-2 text-sm">
-                Leadership · Architecture · Strategy
-              </p>
-            </div>
-
-            {/* CARD 2 */}
-            <div
-              className="w-64 h-[340px] bg-white/15 backdrop-blur-xl
-        rounded-t-full rounded-b-none
-        border border-white/20
-        shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-        flex flex-col items-center justify-start pt-10 text-center
-      "
-            >
-              <div className="w-32 h-32 rounded-full border-4 border-white overflow-hidden mb-6">
-                <img
-                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="text-white text-xl font-bold">Neha Verma</h3>
-              <p className="text-white/80 mt-2 text-sm">
-                Content · UX Writing · Brand Voice
-              </p>
-            </div>
-
-            {/* CARD 3 */}
-            <div
-              className="w-64 h-[340px] bg-white/15 backdrop-blur-xl
-        rounded-t-full rounded-b-none
-        border border-white/20
-        shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-        flex flex-col items-center justify-start pt-10 text-center
-      "
-            >
-              <div className="w-32 h-32 rounded-full border-4 border-white overflow-hidden mb-6">
-                <img
-                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="text-white text-xl font-bold">Ritika Singh</h3>
-              <p className="text-white/80 mt-2 text-sm">
-                Quality · Editing · Content Strategy
-              </p>
-            </div>
-
-            {/* CARD 4 */}
-            <div
-              className="w-64 h-[340px] bg-white/15 backdrop-blur-xl
-        rounded-t-full rounded-b-none
-        border border-white/20
-        shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-        flex flex-col items-center justify-start pt-10 text-center
-      "
-            >
-              <div className="w-32 h-32 rounded-full border-4 border-white overflow-hidden mb-6">
-                <img
-                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="text-white text-xl font-bold">Karan Mehta</h3>
-              <p className="text-white/80 mt-2 text-sm">
-                Development · Performance · Scalability
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="w-full px-4 sm:px-6 py-20">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* LEFT DIV */}
-          <div className="flex flex-col gap-6">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-white">
-              Fun Facts About Our Team
-            </h2>
-
-            <ul className="flex flex-col gap-4 mt-4">
-              {funFacts.map((fact, idx) => (
-                <li
-                  key={idx}
-                  className="flex items-start gap-3 text-white text-lg sm:text-xl"
-                >
-                  <FaStar className="text-pink-500 mt-1 flex-shrink-0" />
-                  <span>{fact}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="relative flex flex-wrap justify-center items-center gap-10 mt-10 lg:mt-0">
-            {clientCircles.map((client, idx) => (
-              <div key={idx} className="relative flex flex-col items-center">
-                <div className="w-52 h-52 sm:w-60 sm:h-60 rounded-full border-4 border-white flex items-center justify-center relative">
-                  <div className="w-44 h-44 sm:w-48 sm:h-48 rounded-full border-2 border-dotted border-white flex items-center justify-center absolute">
-                    <div className="absolute inset-x-0 bottom-[70px] text-center text-white text-xs sm:text-sm px-2">
-                      {client.text}
-                    </div>
-                  </div>
-                  <div className="absolute -bottom-3 -left-3 w-24 h-24 sm:w-20 sm:h-20 rounded-full border-2 border-white overflow-hidden">
-                    <img
-                      src={client.img}
-                      alt={`Client ${idx + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+     <FunFactsSection funFacts={funFacts} clientCircles={clientCircles}/>
     </>
   );
 };
